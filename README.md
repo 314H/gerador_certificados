@@ -44,4 +44,4 @@ Sugiro usar o Google Forms para gerar o formulário de inscrição das palestras
 
 ## Licença
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+Este projeto está sob a licença do MIT - Veja [LICENSE](LICENSE) para mais detalhes.
