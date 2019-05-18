@@ -4,7 +4,7 @@ Este foi um projeto desenvolvido para o Diretório Acadêmico de Enfermagem da U
 
 ## Como utilizar?
 
-1. O primeiro passo é configurar a conta de e-mail do seu diretório para aceitar aplicativos menos seguros. Como a aplicação que desenvolvi (assim como qualquer outra desenvolvida por um mero mortal) não é "assinada digitalmente" ou que possui alguma conexão encriptada, será necessário habilitar aplicativos menos seguro. Clique aqui(https://myaccount.google.com/security) e desative a opção **Acesso a app menos seguro**.
+1. O primeiro passo é configurar a conta de e-mail do seu diretório para aceitar aplicativos menos seguros. Como a aplicação que desenvolvi (assim como qualquer outra desenvolvida por um mero mortal) não é "assinada digitalmente" ou que possui alguma conexão encriptada, será necessário habilitar aplicativos menos seguro. Clique [aqui](https://myaccount.google.com/security) e desative a opção **Acesso a app menos seguro**.
 
 2. Agora você precisa clonar este repositório para poder utilizar.
 
