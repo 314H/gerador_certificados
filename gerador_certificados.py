@@ -67,35 +67,34 @@ def enviar_email (email_de, email_para, email_assunto, email_corpo, nome_do_cert
     msg.attach(part)
     email_texto = msg.as_string()
 
-    server.sendmail(email_de, email_para, email_texto)
+    objeto_conexao_smtp.sendmail(email_de, email_para, email_texto)
 
 '''
   A função conecta_smtp() é utilizada para realizar a conexão ao servidor de e-mail.
 
   [VARIÁVEIS]
-    1. smtp - Armazena a string de servidor SMTP que o usuário digitou.
-    2. smtp_port - Armazena a porta do servidor SMTP que o usuário digitou.
+    1. servidor_smtp - Armazena a string de servidor SMTP que o usuário digitou.
+    2. porta_smtp - Armazena a porta do servidor SMTP que o usuário digitou.
     3. email - Recebe o e-mail que será utilizado para enviar os certificados.
     4. senha - Recebe a senha do e-mail que o usuário digitou.
 '''    
     
 def conecta_smtp():
     while(True):
-        smtp = input("Informe o servidor SMTP: ")
-        smtp_port = int(input("Informe a porta do servidor SMTP: "))
+        servidor_smtp = input("Informe o servidor SMTP: ")
+        porta_smtp = int(input("Informe a porta do servidor SMTP: "))
         email = input("Informe o e-mail que enviará o certificado: ")
         senha = getpass("Informe a senha deste e-mail: ")
-        print(senha)
         try:
-            conn = smtplib.SMTP(smtp, smtp_port) # Objeto SMTP
-            conn.starttls() # Inicia a conexão
-            conn.login(email, senha) # Loga com e-mail e senha
+            objeto_conexao_smtp = smtplib.SMTP(servidor_smtp, porta_smtp) # Objeto SMTP
+            objeto_conexao_smtp.starttls() # Inicia a conexão
+            objeto_conexao_smtp.login(email, senha) # Loga com e-mail e senha
             print("Logado com sucesso.") # Retorno para o usuário.
             break # Se a conexão for bem sucedida, sai do laço
         except smtplib.SMTPException:
             print("Algo deu errado. Confira os dados informados.") # Retorno negativo para usuário
 
-    return conn # Retorna o objeto do servidor SMTP   
+    return objeto_conexao_smtp # Retorna o objeto do servidor SMTP   
     
     
 '''
@@ -104,16 +103,16 @@ def conecta_smtp():
 '''
 if __name__ == "__main__":
   
-    email = "" #Inicializando a variável para recuperar o e-mail de envio depois.
-    server = conecta_smtp() # Variável server recebe o objeto SMTP
+    email = "" # Inicializando a variável para recuperar o e-mail de envio depois.
+    objeto_conexao_smtp = conecta_smtp() # Variável objeto_conexao_smtp recebe o objeto SMTP
     
     planilha = input("Informe o nome da planilha de remetentes: ")
     
     planilha_inscricoes = open_workbook(planilha) # Planilha Excel que será lida
     folha_planilha_inscricoes = planilha_inscricoes.sheet_by_index(0) # Qual "sheet" da sua planilha ler?
 
-    email_assunto = input("Informe o assunto do e-mail:") # Assunto do e-mail
-    email_mensagem = input("Informe a mensagem que irá no corpo do e-mail: ")# Tem como melhorar para a pessoas mandar algo personalizado, como um arquivo html
+    email_assunto = input("Informe o assunto do e-mail: ") # Assunto do e-mail
+    email_mensagem = input("Informe a mensagem que irá no corpo do e-mail: ") # Tem como melhorar para a pessoas mandar algo personalizado, como um arquivo html
 
     for i in range(1,folha_planilha_inscricoes.nrows): # Inicia a leitura de toda a planilha
         aluno_nome_certificado = folha_planilha_inscricoes.row_values(i)[3] # Coluna 3
