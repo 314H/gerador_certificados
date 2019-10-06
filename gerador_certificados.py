@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+from getpass import getpass
 import smtplib
 
 '''
@@ -69,28 +70,50 @@ def enviar_email (email_de, email_para, email_assunto, email_corpo, nome_do_cert
     server.sendmail(email_de, email_para, email_texto)
 
 '''
-  Esse é o método principal de execução onde é feita a leitura do arquivo .xlsx e a chamada das outras funções.
+  A função conecta_smtp() é utilizada para realizar a conexão ao servidor de e-mail.
 
-  [ONDE MEXER?]
-    1. email - Altere a variável email abaixo para o seu e-mail do gmail ou qualquer outro
-    2. senha - Coloque a senha deste email para que o script consiga acessa-lo
-    3. email_mensagem - Qual será o corpo do e-mail?
-    4. email_assunto - Qual o assunto do e-email?
-    5. planilha_inscricoes - O nome padrão do arquivo que o script vai ler é "inscricoes.xlsx", mas você pode altera-lo.
+  [VARIÁVEIS]
+    1. smtp - Armazena a string de servidor SMTP que o usuário digitou.
+    2. smtp_port - Armazena a porta do servidor SMTP que o usuário digitou.
+    3. email - Recebe o e-mail que será utilizado para enviar os certificados.
+    4. senha - Recebe a senha do e-mail que o usuário digitou.
+'''    
+    
+def conecta_smtp():
+    while(True):
+        smtp = input("Informe o servidor SMTP: ")
+        smtp_port = int(input("Informe a porta do servidor SMTP: "))
+        email = input("Informe o e-mail que enviará o certificado: ")
+        senha = getpass("Informe a senha deste e-mail: ")
+        print(senha)
+        try:
+            conn = smtplib.SMTP(smtp, smtp_port) # Objeto SMTP
+            conn.starttls() # Inicia a conexão
+            conn.login(email, senha) # Loga com e-mail e senha
+            print("Logado com sucesso.") # Retorno para o usuário.
+            break # Se a conexão for bem sucedida, sai do laço
+        except smtplib.SMTPException:
+            print("Algo deu errado. Confira os dados informados.") # Retorno negativo para usuário
+
+    return conn # Retorna o objeto do servidor SMTP   
+    
+    
+'''
+  Esse é o método principal de execução onde é feita a leitura do arquivo .xlsx e a chamada das outras funções.
 
 '''
 if __name__ == "__main__":
-    planilha_inscricoes = open_workbook('inscricoes.xlsx') # Planilha Excel que será lida
+  
+    email = "" #Inicializando a variável para recuperar o e-mail de envio depois.
+    server = conecta_smtp() # Variável server recebe o objeto SMTP
+    
+    planilha = input("Informe o nome da planilha de remetentes: ")
+    
+    planilha_inscricoes = open_workbook(planilha) # Planilha Excel que será lida
     folha_planilha_inscricoes = planilha_inscricoes.sheet_by_index(0) # Qual "sheet" da sua planilha ler?
 
-    email = "" # E-mail da conta que enviará o e-mail
-    senha = "" # Senha da conta que enviará o e-mail
-    email_mensagem = "Olá, tudo bem? Segue em anexo o certificado da palestra." # Corpo do e-mail
-    email_assunto = "Certificado da Palestra XXXX" # Assunto do e-mail
-
-    server = smtplib.SMTP("smtp.gmail.com", 587) # Servidor do seu provedor, nesse caso do gmail
-    server.starttls()
-    server.login(email, senha)
+    email_assunto = input("Informe o assunto do e-mail:") # Assunto do e-mail
+    email_mensagem = input("Informe a mensagem que irá no corpo do e-mail: ")# Tem como melhorar para a pessoas mandar algo personalizado, como um arquivo html
 
     for i in range(1,folha_planilha_inscricoes.nrows): # Inicia a leitura de toda a planilha
         aluno_nome_certificado = folha_planilha_inscricoes.row_values(i)[3] # Coluna 3
