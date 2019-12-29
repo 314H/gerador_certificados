@@ -13,29 +13,28 @@ $ git clone https://github.com/mateusmuller/gerador_certificados
 $ cd gerador_certificados
 ```
 
-3. Show, agora você já tem os arquivos necessários. Agora você precisa abrir o arquivo **gerador_certificados.py** e editar as opções de conta (elas estão lá pela linha 85-90).
+3. Agora, você precisa criar um arquivo chamado **parametros.txt** com as seguintes informações:
 
-* email - E-mail da conta que enviará o e-mail
-* senha - Senha da conta que enviará o e-mail
-* email_mensagem - Mensagem no corpo do e-mail
-* email_assunto - Assunto do e-mail
+EMAIL=seuemail@gmail.com
+SENHA=XXXXXX
+SERVIDOR_SMTP=smtp.gmail.com
+PORTA_SMTP=587
+EMAIL_TITULO=Título que vai aparecer no corpo do e-mail
+EMAIL_CORPO=Corpo do e-mail
+PLANILHA_PARTICIPANTES=lista_participantes.xlsx
+FOTO_TEMPLATE_CERTIFICADO=template_certificado.png
 
 4. Coisas que você precisa se atentar: A imagem do certificado e o arquivo de Excel.
 
-* A imagem do certificado sempre se chama **DA_final.png**, então renomeie o seu arquivo para o mesmo nome e coloque nessa pasta.
-* O arquivo de Excel sempre se chama **inscricoes.xlsx**, então você também pode renomear. Outra coisa interessante é que sempre segue o mesmo padrão, onde a coluna 1 é e-mail, coluna 2 é o nome completo e a coluna 3 é o nome que deve aparecer no certificado.
-* Na linha 34 é definido a posição do nome que será escrito (640,1000). Talvez você precise mudar isso, dependendo do tamanho do seu certificado.
+* A imagem do certificado sempre se chama **template_certificado.png**, então renomeie o seu arquivo para o mesmo nome e coloque nessa pasta.
+* O arquivo de Excel sempre se chama **lista_participantes.xlsx**, então você também pode renomear. Outra coisa interessante é que sempre segue o mesmo padrão, onde a coluna 1 é e-mail, coluna 2 é o nome completo e a coluna 3 é o nome que deve aparecer no certificado.
+* Na linha 20 é definido a posição do nome que será escrito (640,1000). Talvez você precise mudar isso, dependendo do tamanho do seu certificado.
 
-5. Finalizado, basta executar o script com:
-
-```
-$ ./gerador_certificados.py
-```
-
-ou
+5. Finalizado, basta executar o script usando Docker (por conta das dependências):
 
 ```
-$ python3 gerador_certificados.py
+$ docker build -t mateus/gerador:1.0 .
+$ docker run --rm --name gerador_certificados mateus/gerador:1.0
 ```
 
 ## Dicas
