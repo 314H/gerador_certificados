@@ -15,6 +15,7 @@ $ cd gerador_certificados
 
 3. Agora, você precisa criar um arquivo chamado **parametros.txt** com as seguintes informações:
 
+```
 EMAIL=seuemail@gmail.com
 SENHA=XXXXXX
 SERVIDOR_SMTP=smtp.gmail.com
@@ -22,7 +23,9 @@ PORTA_SMTP=587
 EMAIL_TITULO=Título que vai aparecer no corpo do e-mail
 EMAIL_CORPO=Corpo do e-mail
 PLANILHA_PARTICIPANTES=lista_participantes.xlsx
+##
 FOTO_TEMPLATE_CERTIFICADO=template_certificado.png
+```
 
 4. Coisas que você precisa se atentar: A imagem do certificado e o arquivo de Excel.
 
@@ -44,3 +47,10 @@ Sugiro usar o Google Forms para gerar o formulário de inscrição das palestras
 ## Licença
 
 Este projeto está sob a licença do MIT - Veja [LICENSE](LICENSE) para mais detalhes.
+
+## Updates
+
+As próximas atualizações serão:
+
+1. Usar o arquivo de credencias como JSON.
+2. Usar docker volumes para transportar o arquivo de credenciais.
