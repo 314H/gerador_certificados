@@ -23,7 +23,6 @@ PORTA_SMTP=587
 EMAIL_TITULO=Título que vai aparecer no corpo do e-mail
 EMAIL_CORPO=Corpo do e-mail
 PLANILHA_PARTICIPANTES=lista_participantes.xlsx
-##
 FOTO_TEMPLATE_CERTIFICADO=template_certificado.png
 ```
 
