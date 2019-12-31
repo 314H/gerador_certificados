@@ -24,7 +24,6 @@ class Gerador_Certificados ():
         self.email_corpo = dados_arquivo_credenciais["e-mail_corpo"]
         self.planilha_participantes = dados_arquivo_credenciais["planilha_participantes"]
         self.foto_template_certificado = dados_arquivo_credenciais["foto_template_certificado"]
-        print(self.email_titulo)
         arquivo_credenciais.close()
 
     def gerar_certificado (self, nome_certificado, nome_arquivo): 
