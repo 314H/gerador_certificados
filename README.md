@@ -40,8 +40,10 @@ Mude os parâmetros conforme o nome dos seus arquivos.
 
 ```
 $ docker build -t gerador_certificados:latest .
-$ docker run --rm --name gerador_certificados gerador_certificados:latest
+$ docker run --rm -v $(pwd)/credenciais.json:/app/credenciais.json gerador_certificados:latest
 ```
+
+**OBS:** Usei o -v para passar o arquivo de credenciais, caso contrário, você teria que criar uma nova imagem a cada atualização neste arquivo.
 
 ## Dicas
 
