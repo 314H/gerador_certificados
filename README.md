@@ -13,18 +13,22 @@ $ git clone https://github.com/mateusmuller/gerador_certificados
 $ cd gerador_certificados
 ```
 
-3. Agora, você precisa criar um arquivo chamado **parametros.txt** com as seguintes informações:
+3. Agora, você precisa criar um arquivo chamado **credenciais.json** com as seguintes informações:
 
 ```
-EMAIL=seuemail@gmail.com
-SENHA=XXXXXX
-SERVIDOR_SMTP=smtp.gmail.com
-PORTA_SMTP=587
-EMAIL_TITULO=Título que vai aparecer no corpo do e-mail
-EMAIL_CORPO=Corpo do e-mail
-PLANILHA_PARTICIPANTES=lista_participantes.xlsx
-FOTO_TEMPLATE_CERTIFICADO=template_certificado.png
+{
+    "e-mail" : "seuemail@gmail.com",
+    "senha" : "suasenha",
+    "servidor_smtp" : "smtp.gmail.com",
+    "porta_smtp" : 587,
+    "e-mail_titulo" : "Certificados da Palestra XXX",
+    "e-mail_corpo" : "Segue o e-mail em anexo.",
+    "planilha_participantes" : "lista_participantes.xlsx",
+    "foto_template_certificado" : "template_certificado.png"
+}
 ```
+
+Mude os parâmetros conforme o nome dos seus arquivos.
 
 4. Coisas que você precisa se atentar: A imagem do certificado e o arquivo de Excel.
 
