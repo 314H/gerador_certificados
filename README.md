@@ -39,8 +39,8 @@ Mude os parâmetros conforme o nome dos seus arquivos.
 5. Finalizado, basta executar o script usando Docker (por conta das dependências):
 
 ```
-$ docker build -t mateus/gerador:1.0 .
-$ docker run --rm --name gerador_certificados mateus/gerador:1.0
+$ docker build -t gerador_certificados:latest .
+$ docker run --rm --name gerador_certificados gerador_certificados:latest
 ```
 
 ## Dicas
